@@ -1,5 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { Link } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import {
   BottomSheetBackdrop,
   BottomSheetModal,
@@ -30,19 +38,60 @@ const BottomSheet = React.forwardRef<BottomSheetModal>(
           />
         )}
       >
-        <View style={styles.contentContainer}>
-          <View style={styles.toggle}>
-            <TouchableOpacity style={styles.toggleActive}>
-              <Text style={styles.toggleActiveText}>Delivery</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.toggleDisable}>
-              <Text style={styles.toggleDisableText}>Pickup</Text>
+        <ScrollView>
+          <View style={styles.contentContainer}>
+            <View style={styles.toggle}>
+              <TouchableOpacity style={styles.toggleActive}>
+                <Text style={styles.toggleActiveText}>Delivery</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.toggleDisable}>
+                <Text style={styles.toggleDisableText}>Pickup</Text>
+              </TouchableOpacity>
+            </View>
+
+            <Text style={styles.subHeader}>Your ocation</Text>
+            <Link href={`/`} asChild>
+              <TouchableOpacity>
+                <View style={styles.item}>
+                  <Ionicons
+                    name="location-outline"
+                    size={20}
+                    color={COLORS.medium}
+                  />
+                  <Text style={{ flex: 1 }}>Current Location</Text>
+                  <Ionicons
+                    name="chevron-forward"
+                    size={20}
+                    color={COLORS.primary}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Link>
+
+            <Text style={styles.subHeader}>Arrival Time</Text>
+            <Link href={`/`} asChild>
+              <TouchableOpacity>
+                <View style={styles.item}>
+                  <Ionicons
+                    name="stopwatch-outline"
+                    size={20}
+                    color={COLORS.medium}
+                  />
+                  <Text style={{ flex: 1 }}>Now</Text>
+                  <Ionicons
+                    name="chevron-forward"
+                    size={20}
+                    color={COLORS.primary}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Link>
+
+            <TouchableOpacity style={styles.button} onPress={() => dismiss()}>
+              <Text style={styles.buttonText}>Confirm</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.button} onPress={() => dismiss()}>
-            <Text style={styles.buttonText}>Confirm</Text>
-          </TouchableOpacity>
-        </View>
+        </ScrollView>
       </BottomSheetModal>
     );
   }
@@ -63,7 +112,7 @@ const styles = StyleSheet.create({
   },
   toggleActive: {
     backgroundColor: COLORS.primary,
-    padding: 8,
+    padding: 4,
     borderRadius: 32,
     paddingHorizontal: 25,
   },
@@ -72,7 +121,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   toggleDisable: {
-    padding: 8,
+    padding: 4,
     borderRadius: 32,
     paddingHorizontal: 25,
   },
@@ -89,10 +138,26 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 4,
     margin: 16,
+    marginTop: 20,
     alignItems: "center",
   },
   buttonText: {
     color: "#fff",
     fontWeight: "bold",
+  },
+  subHeader: {
+    fontSize: 16,
+    fontWeight: "600",
+    margin: 16,
+  },
+  item: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    gap: 8,
+    padding: 16,
+    borderColor: COLORS.grey,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
 });
