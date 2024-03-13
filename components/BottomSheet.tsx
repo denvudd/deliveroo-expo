@@ -49,8 +49,8 @@ const BottomSheet = React.forwardRef<BottomSheetModal>(
               </TouchableOpacity>
             </View>
 
-            <Text style={styles.subHeader}>Your ocation</Text>
-            <Link href={`/`} asChild>
+            <Text style={styles.subHeader}>Your location</Text>
+            <Link href={`/(modal)/location-search`} asChild>
               <TouchableOpacity>
                 <View style={styles.item}>
                   <Ionicons

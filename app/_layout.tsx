@@ -52,6 +52,7 @@ export default function RootLayout() {
             header: () => <MainHeader />,
           }}
         />
+
         <Stack.Screen
           name="(modal)/filter"
           options={{
@@ -59,6 +60,23 @@ export default function RootLayout() {
             headerTitle: "Filter",
             headerShadowVisible: false,
             headerStyle: { backgroundColor: COLORS.lightGrey },
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Ionicons
+                  name="close-outline"
+                  size={28}
+                  color={COLORS.primary}
+                />
+              </TouchableOpacity>
+            ),
+          }}
+        />
+
+        <Stack.Screen
+          name="(modal)/location-search"
+          options={{
+            presentation: "fullScreenModal",
+            headerTitle: "Select location",
             headerLeft: () => (
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Ionicons
