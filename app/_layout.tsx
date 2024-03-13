@@ -1,13 +1,9 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
-import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
-import { useColorScheme } from "react-native";
+import { SplashScreen, Stack } from "expo-router";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { useFonts } from "expo-font";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import MainHeader from "@/components/MainHeader";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -43,18 +39,16 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
-}
-
-function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+    <BottomSheetModalProvider>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+        <Stack.Screen
+          name="index"
+          options={{
+            header: () => <MainHeader />,
+          }}
+        />
       </Stack>
-    </ThemeProvider>
+    </BottomSheetModalProvider>
   );
 }
